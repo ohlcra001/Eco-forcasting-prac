@@ -30,6 +30,7 @@ plot.NDVI(dat)
 Q1: This plot suggests that Fynbos greenness (NDVI) as observed from satellite saturates with time since fire. Why do you think it saturates rather than increasing linearly with time?
 
 >*Answer 1:*
+My theory is that either the plants distributing and building the seed banks begin to die off after an extended period therfore limiting the amount of seeds, or, once the seeds begin to germinate there's an intrinsic carrying capacity limiting the amount of greenery and plants even if the seed banks kept building throughout the years.
 <br>
 
 ### 2. Fit models using Non-linear Least Squares (NLS)
@@ -88,7 +89,7 @@ Lots more parameters...
 
 Q2: How do the estimates for the common parameters compare?
 
->*Answer 2:*
+>*Answer 2:* Alpha which represents NDVI right after fire has decreased in the more complicated model, showing the simple model perhaps overestimated greenary values for time 0. However the gamma value has increased in the second graph indicating a stronger emphasis on the maximum change of NDVI due to time rather than its initial value compared to the simpler model. Lamda or the rate of increase of NDVI has also decreased slightly in the more complicated model, meaning even though the maximum change is larger than the simple model, its starting value is much lower and so the rate ends up lower to the simple model.
 <br>
 
 ### 3. Compare NLS models using ANOVA
@@ -101,14 +102,16 @@ Modelers often want to know which of a set of models are better. One way to do t
 anova(fit_negexp, fit_negexpS)
 ```
 
-<br>
-
 Q3: Which model is better?
 
 >*Answer 3:*
+It would appear model 2 has slightly less residual sum of squares normally indicating a better model, it certainly has a stronger fit. However when analysing models we must consider other factors which might come into play such as over-fitting.
+<br>
+
 Q4: How many degrees of freedom are there in this ANOVA and why (i.e. what are they)?
 
 >*Answer 4:*
+2 degrees of freedom, as we are using the two models as comparisons 
 <br>
 
 ### 4. Fit models using Maximum Likelihood Estimation (MLE)
@@ -191,6 +194,7 @@ AIC_simple - AIC_full
 Q5: Is there a preferred model and if so, which one?
 
 >*Answer 5:*
+In this case the answer is much more clear, model 2 has a much lower AIC clearly indicating it as the preferred model.
 <br>
 
 The nice thing about AIC is that the models you compare do not have to be nested like they do for ANOVA, as long as the data are the same. There are a few other constraints however... 
@@ -208,4 +212,5 @@ You'll notice that these are completely different to the AICs for the MLE models
 Q6: Why is it not okay to compare the AIC of these NLS models with the AIC of the MLE models? Hint: type `?AIC` into the R console and do some reading.
 
 >*Answer 6:*
+AIC can only be used to compare models which are nested within one or another or some variation of another.It uses log-likelihood and maximum likelihood, therefore for a model like NLS, the AIC can be calculated but shouldnt be compared to a model which uses Maximum likelihood such as our MLE funcitons
 <br>
